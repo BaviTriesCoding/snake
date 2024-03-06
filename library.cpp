@@ -21,7 +21,7 @@ void EndProgram(int _points){
 //CLOCK_PER_MILLISEC = 1,000
 int normalizedInput(int _milliseconds){
     clock_t start, end;
-    int input, i=0, output=0;
+    int input, i, output=0;
     bool found;
     int permitted_input[]={(int)'w',(int)'W',(int)'a',(int)'A',(int)'s',(int)'S',(int)'d',(int)'D', KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT, (int)'q', (int)'Q'};
     start = clock();
@@ -35,7 +35,7 @@ int normalizedInput(int _milliseconds){
         }
         if(found){output = input;}
         end = clock();
-    }while(double(end - start) <= _milliseconds*1000);
+    }while(_milliseconds * (CLOCKS_PER_SEC / 1000) >= int(end - start));
     return output;
 }
 bool evalMove(snake* _scope, int _pressedKey){
